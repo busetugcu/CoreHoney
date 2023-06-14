@@ -1,0 +1,68 @@
+﻿@model HoneyListModel
+
+@{
+    ViewData["Title"] = "HoneyList";
+}
+
+<h1>Admin HoneyList</h1>
+
+<p>
+    <a asp-action="CreateHoney" class="btn btn-primary">Create New</a>
+</p>
+@if (Model.Honeys.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Image")
+                </th>
+                <th>
+                    @Html.DisplayName("Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Decription")
+                </th>
+                <th>
+                    @Html.DisplayName("Price")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Honeys)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/@item.Image" width="80">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Decription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-action="EditHoney" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="DeleteHoney" method="post" style="display:inline">
+                            <input type="hidden" name="productId" value="@item.Id">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        <h4> No Products </h4>
+    </div>
+}

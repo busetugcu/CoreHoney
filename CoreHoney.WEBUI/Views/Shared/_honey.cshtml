@@ -1,0 +1,39 @@
+﻿
+@model Honey
+
+
+<div class=" col-4 mt-3">
+	<div class="card">
+		<img src="~/images/@Model.Image" alt="@Model.Name" />
+
+        <div class="card-body">
+            <h4 class="card-title">
+                <a href="#">@Model.Name</a>
+            </h4>
+            <small class="text-muted">
+                <i class="fa-sharp fa-regular fa-turkish-lira-sign"></i> @Model.Price
+            </small>
+        </div>
+
+        <div class="card-footer text-center">
+            <a asp-controller="Honey" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-sm float-start">Details</a>
+           
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline">
+                    <input type="hidden" name="honeyId" value="@Model.Id">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-outline-primary btn-sm float-end">AddToCart</button>
+                </form>
+            }
+            
+            
+        </div>
+
+
+
+
+		</div>
+
+
+</div>
